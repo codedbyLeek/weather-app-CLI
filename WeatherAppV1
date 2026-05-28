@@ -1,0 +1,19 @@
+import requests
+
+
+city = input("Enter a city name: ")
+print("You want the weather for: " + city)
+
+url = "https://wttr.in/" + city + "?format=j1"
+
+try:
+    response = requests.get(url)
+    data = response.json()
+    temp = data["current_condition"][0]["temp_F"]
+    desc = data["current_condition"][0]["weatherDesc"][0]["value"]
+    humidity = data["current_condition"][0]["humidity"]
+    print("Temperature: " + temp + "°F")
+    print("Condition: " + desc)
+    print("Humidity: " + humidity + "%")
+except:
+    print("Something went wrong! Please check your city name and try again.")
